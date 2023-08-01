@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 public class WeatherChecker {
 
-    private static final String API_KEY = "da7ab6e8dc966251e8f8380dfe63d249"; //this key can be used for particular period
+    private static final String API_KEY = ""; //this key can be used for particular period
     private static final String API_URL = "http://api.openweathermap.org/data/2.5/weather?q=CITY_NAME,COUNTRY_CODE&APPID=" + API_KEY;
 
     public static void main(String[] args) {
