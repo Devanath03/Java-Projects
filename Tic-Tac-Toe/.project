@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TypingSpeedChecker</name>
+	<name>Tic-Tac-Toe</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1693763500235</id>
+			<id>1693763500229</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
