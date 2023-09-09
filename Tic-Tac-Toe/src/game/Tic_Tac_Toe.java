@@ -142,6 +142,8 @@ public class Tic_Tac_Toe implements ActionListener {
     public static void main(String[] args) { 
         new Tic_Tac_Toe(); 
       //FOR SEEING VALUES ADDED IN TABLE
+        
+        /*
         System.out.println();
         System.out.println("Data updated in database");
         try {
@@ -158,5 +160,6 @@ public class Tic_Tac_Toe implements ActionListener {
  	   {
  		   System.out.println(e.toString());
  	   }
+        */
     } 
 }
