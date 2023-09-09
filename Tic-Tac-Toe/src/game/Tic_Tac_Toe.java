@@ -2,13 +2,21 @@ package game;
 
 import javax.swing.*; 
 import java.awt.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.*;
  
 public class Tic_Tac_Toe implements ActionListener { 
     private JFrame frame; 
     private JPanel panel; 
     private JButton[] buttons = new JButton[9]; 
-    private boolean xTurn = true; 
+    private boolean xTurn = true;
+    static String temp = "";
  
     public Tic_Tac_Toe() { 
         frame = new JFrame("Tic-Tac-Toe"); 
@@ -46,7 +54,8 @@ public class Tic_Tac_Toe implements ActionListener {
         for (int i = 0; i < 9; i += 3) { 
             if (buttons[i].getText().equals(buttons[i + 1].getText()) && buttons[i] 
                     .getText().equals(buttons[i + 2].getText()) && !buttons[i].isEnabled()) { 
-                JOptionPane.showMessageDialog(frame, buttons[i].getText() + " wins!"); 
+                JOptionPane.showMessageDialog(frame, buttons[i].getText() + " wins!");
+                StoreValue(buttons[i].getText());
                 resetGame(); 
                 return; 
             } 
@@ -56,7 +65,8 @@ public class Tic_Tac_Toe implements ActionListener {
                     && buttons[i].getText().equals(buttons[i + 6].getText()) 
                     && !buttons[i].isEnabled()) { 
                 JOptionPane.showMessageDialog(frame, buttons[i] 
-                        .getText() + " wins!"); 
+                        .getText() + " wins!");
+                StoreValue(buttons[i].getText());
                 resetGame(); 
                 return; 
             } 
@@ -66,7 +76,8 @@ public class Tic_Tac_Toe implements ActionListener {
                 buttons[0].getText().equals(buttons[8].getText()) && 
                 !buttons[0].isEnabled()) { 
             JOptionPane.showMessageDialog(frame, buttons[0] 
-                    .getText() + " wins!"); 
+                    .getText() + " wins!");
+            StoreValue(buttons[0].getText());
             resetGame(); 
             return; 
         } 
@@ -76,6 +87,7 @@ public class Tic_Tac_Toe implements ActionListener {
                 !buttons[2].isEnabled()) { 
             JOptionPane.showMessageDialog(frame, buttons[2] 
                     .getText() + " wins!"); 
+            StoreValue(buttons[2].getText());
             resetGame(); 
             return; 
         } 
@@ -90,6 +102,7 @@ public class Tic_Tac_Toe implements ActionListener {
         } 
         if (tie) { 
             JOptionPane.showMessageDialog(frame, "Tie game!"); 
+            StoreValue("Tie");
             resetGame(); 
         } 
     } 
@@ -100,9 +113,50 @@ public class Tic_Tac_Toe implements ActionListener {
             buttons[i].setEnabled(true); 
         } 
         xTurn = true; 
-    } 
+    }
+    
+    public void StoreValue(String str) {
+    	if(str.equals("Tie")) {
+    		str+=" game!";
+    	}else {
+    		str+=" wins";
+    	}
+    	System.out.println(str);
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    	Date date = new Date();
+    	String date_value = formatter.format(date);
+    	System.out.println(date_value);
+    	try {
+       	 Class.forName("com.mysql.cj.jdbc.Driver");
+           Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/game", "root", "Deva@2002");
+           //Keela irukara winners table name
+           String query = "INSERT INTO winners values('" + str + "','" + date_value + "')";
+           Statement sta = connection.createStatement();
+           sta.executeUpdate(query);
+           connection.close();
+       } catch (Exception exception) {
+           exception.printStackTrace();
+       }
+    }
  
     public static void main(String[] args) { 
         new Tic_Tac_Toe(); 
+      //FOR SEEING VALUES ADDED IN TABLE
+        System.out.println();
+        System.out.println("Data updated in database");
+        try {
+ 		   Class.forName("com.mysql.cj.jdbc.Driver");
+ 		   Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/game","root","Deva@2002");
+ 		   Statement stmt=con.createStatement();
+ 		   ResultSet rs=stmt.executeQuery("Select * from winners");
+ 	   while(rs.next())
+ 	   {
+ 		   System.out.println(rs.getString(1)+"  "+rs.getString(2));
+ 	   }
+ 	   }
+ 	   catch(Exception e)
+ 	   {
+ 		   System.out.println(e.toString());
+ 	   }
     } 
 }
