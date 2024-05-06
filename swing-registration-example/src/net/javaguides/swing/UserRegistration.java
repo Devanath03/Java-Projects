@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 /**
  * User Registration using Swing
  * @author javaguides.net
- *
+ **
  */
 public class UserRegistration extends JFrame {
     private static final long serialVersionUID = 1L;
