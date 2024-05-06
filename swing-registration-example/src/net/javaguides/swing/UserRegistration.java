@@ -53,7 +53,7 @@ public class UserRegistration extends JFrame {
     }
 
     /**
-     * Create the frame.
+     * Create the frame..
      */
 
     public UserRegistration() {
