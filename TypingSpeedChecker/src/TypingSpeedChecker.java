@@ -20,4 +20,4 @@ public class TypingSpeedChecker {
     }
 }
 }
-1234567890,12
+1234567890,123
