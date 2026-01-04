@@ -19,4 +19,4 @@ public class TypingSpeedChecker {
     	System.out.println("The text you typed does not match the original text");
     }
 }
-}123456788901
+}1234567889012
