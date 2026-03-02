@@ -18,6 +18,6 @@ public class TypingSpeedChecker {
     else {
     	System.out.println("The text you typed does not match the original text");
     }
-}12345678
+}1234678
 
 }
